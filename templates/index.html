@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf8">
+    <script type='text/javascript' src='jquery.min.js'></script>
+    <script type='text/javascript' src='jquery-ui.min.js'></script>
+    <script type='text/javascript' src='./jquery.tag.js'></script>
+    <link media="screen" rel="stylesheet" href="./jquery.tag.css" type="text/css" />
+    <link media="screen" rel="stylesheet" href="./jquery-ui.custom.css" type="text/css" />
+    <script>
+    $(function () {
+            var json_data = {{json_data|safe}};
+            if(json_data.status===0){
+                console.log(json_data.msg);
+                alert(json_data);
+                return ;
+            }
+            var imgSrc = $("#image").attr("src");
+            list = {}; 
+            var img = new Image();
+            img.src = imgSrc;
+            w = img.width;
+            h = img.height;
+            for (var i = 0, l = json_data.length; i < l; i++) {
+                    y2 = json_data[i]['y2'];
+                    x2 = json_data[i]['x2'];
+                    y1 = json_data[i]['y1'];
+                    x1 = json_data[i]['x1'];
+                    arr = {};
+                    list[i] = {};
+                    arr['width'] = w * (x2 - x1); 
+                    arr['height'] = h*(y2-y1);
+                    arr['top'] = h*y1;
+                    arr['left'] = w*x1; 
+                    arr['label'] = json_data[i]['class_name']+'('+json_data[i]['score'].toFixed(2)+')';
+                    list[i] = arr; 
+            }
+            console.log(list);
+            draw(list);
+    });
+    function draw(data)
+    {
+        $("#image").tag({
+            showTag: 'always',
+            canDelete: false,
+            canTag: false,
+            defaultTags:data
+        });
+    }
+    function getImageWidth(url, callback) {
+        // 如果图片被缓存，则直接返回缓存数据
+        if (img.complete) {
+            callback(img.width, img.height);
+        } else {
+            // 完全加载完毕的事件
+            img.onload = function () {
+                callback(img.width, img.height);
+            }
+        }
+    }
+    </script>
+    <style>
+        body{margin:0;}
+    </style>
+</head>
+<body>
+    <img src="./upload/{{img}}" id='image'>
+<a href='/upload'>返回上传</a>
+</body>
+</html>
