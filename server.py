@@ -4,9 +4,10 @@ import os
 from PIL import Image
 from flask import Flask, request, Response,send_from_directory,render_template
 import time
+import object_detection_api
 
 app = Flask(__name__,static_url_path='')
-app.config['SEND_FILE_MAX_AGE_DEFAULT']=1
+app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 1
 root = os.path.join(os.path.dirname(os.path.abspath(__file__)), "static")
 
 
@@ -25,20 +26,17 @@ def upload():
 
 @app.route('/')
 def index():
-    import object_detection_api
-    PATH_TO_TEST_IMAGES_DIR = 'test_images'  # cwh
-    TEST_IMAGE_PATHS = [os.path.join(PATH_TO_TEST_IMAGES_DIR, 'image{}.jpg'.format(i)) for i in range(3, 4)]
-    image = Image.open(TEST_IMAGE_PATHS[0])
-    objects = object_detection_api.get_objects(image)
+    base_path = os.path.abspath(os.path.dirname(__file__))
+    upload_path = os.path.join(base_path, 'static/upload/')
+    file_name = upload_path + '1.jpg'
+    objects = object_detection_api.get_objects(file_name)
     return objects
 
 # 网页上传图片
 @app.route('/image', methods=['POST','GET'])
 def image():
-    import object_detection_api
     startTime = time.time()
     if request.method=='POST':
-        #保存上传图片
         image_file = request.files['file']
         base_path = os.path.abspath(os.path.dirname(__file__))
         upload_path = os.path.join(base_path,'static/upload/')
@@ -54,7 +52,6 @@ def image():
 @app.route('/getObject/', methods=['GET'])
 def getObject():
     startTime = time.time()
-    import object_detection_api
     if request.method=='GET':
         threshold = request.args.get('threshold',0.5)
         file_name = request.args.get('file_name')
@@ -67,7 +64,6 @@ def getObject():
 @app.route('/check', methods=['POST', 'GET'])
 def check():
     startTime = time.time()
-    import object_detection_api
     if request.method == 'POST':
         image_file = request.files['file']
         base_path = os.path.abspath(os.path.dirname(__file__))

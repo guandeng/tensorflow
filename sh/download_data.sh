@@ -5,12 +5,12 @@ cd $DIR
 
 echo "rcnn Dowloading..."
 
-cd data/models/
-wget -c http://download.tensorflow.org/models/object_detection/faster_rcnn_inception_resnet_v2_atrous_coco_2018_01_28.tar.gz
+cd ../data/models/
+wget -c http://download.tensorflow.org/models/object_detection/ssd_mobilenet_v2_coco_2018_03_29.tar.gz
 
 echo "rcnn Extracting..."
-tar -zxvf faster_rcnn_inception_resnet_v2_atrous_coco_2018_01_28.tar.gz
-rm faster_rcnn_inception_resnet_v2_atrous_coco_2018_01_28.tar.gz 
+tar -zxvf ssd_mobilenet_v2_coco_2018_03_29.tar.gz
+rm ssd_mobilenet_v2_coco_2018_03_29.tar.gz 
 
 echo "tensorflow models Dowloading..."
 cd ../tf_models/

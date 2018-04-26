@@ -19,7 +19,7 @@ if tf.__version__ < '1.6.0':
 ## 官方模型---start
 # 模型地址
 # https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/detection_model_zoo.md
-MODEL_NAME = 'data/models/faster_rcnn_inception_resnet_v2_atrous_coco_2018_01_28'
+MODEL_NAME = 'data/models/ssd_mobilenet_v2_coco_2018_03_29'
 PATH_TO_CKPT = MODEL_NAME + '/frozen_inference_graph.pb'
 PATH_TO_LABELS = os.path.join('data/pbtxt','mscoco_label_map.pbtxt')  # CWH: Add object_detection path
 # data下mscoco_label_map.pbtxt最大item.id

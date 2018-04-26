@@ -97,10 +97,10 @@ function startObjectDetection() {
     imageCanvas.height = uploadWidth * (v.videoHeight / v.videoWidth);
 
     //Some styles for the drawcanvas
-    drawCtx.lineWidth = 4;
-    drawCtx.strokeStyle = "cyan";
-    drawCtx.font = "20px Verdana";
-    drawCtx.fillStyle = "cyan";
+    drawCtx.lineWidth = 2;
+    drawCtx.strokeStyle = "red";
+    drawCtx.font = "14px Verdana";
+    drawCtx.fillStyle = "#FFF";
 
     //Save and send the first image
     imageCtx.drawImage(v, 0, 0, v.videoWidth, v.videoHeight, 0, 0, uploadWidth, uploadWidth * (v.videoHeight / v.videoWidth));

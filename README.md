@@ -9,9 +9,10 @@
 
 ## 安装和启动
 ```
+$ pip3 install -r requirements.txt
 $ git clone https://github.com/guandeng/tensorflow.git
 $ sh sh/download_data.sh
-$ echo PYTHONPATH=$PYTHONPATH:/home/ods/data/tf_models/models/research && source ~/.bashrc 
+$ echo 'PYTHONPATH=$PYTHONPATH:`pwd`/data/tf_models/models/research'>>~/.bashrc && source ~/.bashrc 
 $ python3 server.py &
 ```
 
