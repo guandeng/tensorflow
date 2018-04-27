@@ -27,8 +27,8 @@ def upload():
 @app.route('/')
 def index():
     base_path = os.path.abspath(os.path.dirname(__file__))
-    upload_path = os.path.join(base_path, 'static/upload/')
-    file_name = upload_path + '1.jpg'
+    upload_path = os.path.join(base_path, 'static/')
+    file_name = upload_path + 'test.jpg'
     objects = object_detection_api.get_objects(file_name)
     return objects
 
